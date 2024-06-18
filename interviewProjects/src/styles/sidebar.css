@@ -1,0 +1,31 @@
+.aside {
+  background-color: rgb(18, 54, 91);
+  padding: 3.2rem 2.4rem;
+  color: rgb(200, 216, 218);
+  list-style: none;
+  grid-row: 1 / -1;
+  display: flex;
+  position: relative;
+}
+.aside button {
+  position: absolute;
+  left: 355px;
+  top: 35px;
+  color: rgb(200, 216, 218);
+  background-color: rgb(18, 54, 91);
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+}
+.nav {
+  text-decoration: none;
+  color: rgb(200, 216, 218);
+  font-size: 20px;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+  gap: 20px;
+}
