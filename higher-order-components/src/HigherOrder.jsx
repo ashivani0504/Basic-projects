@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default function HigherOrder(title, Component, endpoint) {
+function HigherOrder(title, Component, endPoint) {
   return function HOC() {
     const [data, setData] = useState([]);
 
-    useEffect(() => {
-      fetch(`https://jsonplaceholder.typicode.com/${endpoint}`)
+    useEffect(function () {
+      fetch(`https://jsonplaceholder.typicode.com/${endPoint}`)
         .then((res) => res.json())
-        .then((post) => setData(post))
+        .then((data) => setData(data))
         .catch((error) => console.error(error));
     }, []);
-
     return (
       <div>
         <h1>{title}</h1>
@@ -19,3 +18,5 @@ export default function HigherOrder(title, Component, endpoint) {
     );
   };
 }
+
+export default HigherOrder;
