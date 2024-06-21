@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  function promiseOne(paramOne) {
+    return new Promise((resolve, reject) => {
+      if (paramOne === "icecream") {
+        resolve("icecream accepted [ promise resolved ]");
+      } else {
+        reject("icecream rejected [ promise rejected ]");
+      }
+    });
+  }
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  function promiseTwo(paramTwo) {
+    return new Promise((resolve, reject) => {
+      if (paramTwo === "icecream accepted [ promise resolved ]") {
+        resolve("icecream is good [ promise resolved ]");
+      } else {
+        reject("icecream is bad [ promise rejected ]");
+      }
+    });
+  }
+
+  //PROMISES
+
+  function promiseMain() {
+    promiseOne("icecream")
+      .then((fresponse) => {
+        console.log(fresponse);
+        return promiseTwo(fresponse);
+      })
+      .then((sresponse) => {
+        console.log(sresponse);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  //ASYNC /AWAIT
+
+  async function asyncMain() {
+    try {
+      const responseOne = await promiseOne("icecream");
+      console.log(responseOne);
+      const responseTwo = await promiseTwo(responseOne);
+      console.log(responseTwo);
+    } catch {
+      console.log("icecream is rejected or not bought [ promise rejected ]");
+    }
+  }
+
+  useEffect(function () {
+    promiseMain();
+    asyncMain();
+  }, []);
+
+  return <div> outputs in console.log</div>;
 }
 
-export default App
+export default App;
